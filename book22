@@ -1,0 +1,96 @@
+public class Book {
+    // Attributes
+    private String title;
+    private String author;
+    private double price;
+    private boolean isAvailable;
+    
+    // Static attribute to count number of books
+    private static int numOfBooks = 0;
+
+    // Constructor
+    public Book(String title, String author, double price, boolean isAvailable) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.isAvailable = isAvailable;
+        numOfBooks++;
+    }
+
+    // Copy constructor
+    public Book(Book other) {
+        this.title = other.title;
+        this.author = other.author;
+        this.price = other.price;
+        this.isAvailable = other.isAvailable;
+        numOfBooks++;
+    }
+
+    // Display book details
+    public void displayDetails() {
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("Price: $" + price);
+        System.out.println("Available: " + isAvailable);
+        System.out.println("------------------------");
+    }
+
+    // Apply discount
+    public void applyDiscount(double percentage) {
+        price -= price * (percentage / 100);
+    }
+
+    // Equals method
+    public boolean equals(Book other) {
+        return this.title.equals(other.title) &&
+               this.author.equals(other.author) &&
+               this.price == other.price &&
+               this.isAvailable == other.isAvailable;
+    }
+
+    // Getter & Setter for title
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    // Static method to get number of books
+    public static int getNumOfBooks() {
+        return numOfBooks;
+    }
+}
+public class BookDemo {
+    public static void main(String[] args) {
+        // Create obj1 using constructor
+        Book obj1 = new Book("Python Programming", "Reema Thareja", 145, true);
+
+        // Create obj2 as a copy of obj1
+        Book obj2 = new Book(obj1);
+
+        // Display info of obj1 and obj2
+        System.out.println("=== First Display ===");
+        obj1.displayDetails();
+        obj2.displayDetails();
+
+        // Check equality
+        System.out.println("obj1 equals obj2? " + obj1.equals(obj2));
+
+        // Change title of obj2
+        obj2.setTitle("Programming in C");
+
+        // Check equality again
+        System.out.println("\nAfter changing obj2's title:");
+        System.out.println("obj1 equals obj2? " + obj1.equals(obj2));
+
+        // Display info again
+        System.out.println("\n=== Second Display ===");
+        obj1.displayDetails();
+        obj2.displayDetails();
+
+        // Print number of created books
+        System.out.println("Number of created books: " + Book.getNumOfBooks());
+    }
+}
